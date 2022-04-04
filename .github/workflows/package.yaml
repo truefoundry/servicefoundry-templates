@@ -40,5 +40,5 @@ jobs:
           git add *.tgz
           git status
           git diff-index --quiet HEAD || 
-             ( git commit -a -m '[CI] Publish charts' && 
+             ( git commit -a -m '[CI] Publish packages' && 
              git push origin gh-pages)
