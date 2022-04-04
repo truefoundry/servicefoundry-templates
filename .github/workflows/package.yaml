@@ -29,7 +29,7 @@ jobs:
           for dir in ./services/*     
           do
             echo "Zipping ${dir}"
-            tar -zcvf packages/${dir##*/}.tar.gz ${dir}
+            tar -zcvf packages/${dir##*/}.tgz ${dir}
           done
       - name: Move packaged templates gh-pages branch 
         run: |
