@@ -21,9 +21,6 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
-      - name: Install zip
-        uses: montudor/action-zip@v1
-
       - name: Switch to main branch dir
         run: |
           echo "Switching to main and zipping up all packages"
@@ -32,7 +29,7 @@ jobs:
           for dir in ./services/*     
           do
             echo "Zipping ${dir}"
-            tar -zcvf packages/${dir}.tar.gz services/${dir}
+            tar -zcvf packages/${dir##*/}.tar.gz ${dir}
           done
       - name: Move packaged templates gh-pages branch 
         run: |
