@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "services/*"
-
 jobs:
   release:
     runs-on: ubuntu-latest
