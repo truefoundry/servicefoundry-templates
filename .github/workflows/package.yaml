@@ -1,0 +1,55 @@
+name: Package templates
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "services/*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v2
+        with:
+          ref: main
+          path: main
+
+      - name: Checkout gh-pages
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: "0"
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.4.0
+
+      - name: Install zip
+        uses: montudor/action-zip@v1
+
+      - name: Switch to main branch dir
+        run: |
+          echo "Switching to main and zipping up all packages"
+          cd main
+          mkdir packages
+          for dir in ./services/*     
+          do
+            echo "Zipping ${dir}"
+            tar -zcvf packages/${dir}.tar.gz services/{dir}
+          done
+      - name: Move packaged templates gh-pages branch 
+        run: |
+          cd gh-pages
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          mv ../main/packages/* .
+          git add *.tgz
+          git status
+          git diff-index --quiet HEAD || 
+             ( git commit -a -m '[CI] Publish charts' && 
+             git push origin gh-pages)
