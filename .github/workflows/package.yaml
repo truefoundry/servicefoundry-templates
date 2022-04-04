@@ -21,11 +21,6 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
-      - name: Install Helm
-        uses: azure/setup-helm@v1
-        with:
-          version: v3.4.0
-
       - name: Install zip
         uses: montudor/action-zip@v1
 
@@ -37,7 +32,7 @@ jobs:
           for dir in ./services/*     
           do
             echo "Zipping ${dir}"
-            tar -zcvf packages/${dir}.tar.gz services/{dir}
+            tar -zcvf packages/${dir}.tar.gz services/${dir}
           done
       - name: Move packaged templates gh-pages branch 
         run: |
