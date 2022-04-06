@@ -4,7 +4,7 @@ params:
   - id: service_name
     type: string
     prompt: Name your FastAPI service
-    default: my_fast_api_service
+    default: my-fast-api-service
   - id: python_version
     type: options
     prompt: Choose a Python version for your FastAPI
