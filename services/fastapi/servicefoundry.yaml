@@ -1,10 +1,10 @@
 version: 1
-name: ${service_name}
+name: {{service_name}}
 
 build:
     service_build:
         service_type: fast_api_build
-        version: python:3.7
+        version: {{python_version}}
         service: main.py
         packages: requirements.txt
 
@@ -22,7 +22,6 @@ deploy:
         memory_limit: 1024000000
         instances: ${stage.INSTANCES}
         env:
-            MY_SECRET: ${stage.MY_SECRET}
             NUM_THREADS: 10
         health_check:
             endpoint: ./health
@@ -32,10 +31,5 @@ deploy:
 
 envs:
     dev:
-        space: us-east-1-c1:cloud:int-space
+        space: {{space}}
         INSTANCES: 1
-        MY_SECRET: ${tfy:cloud:my-secret-group:my-secret}
-    staging:
-        space: truefoundry-eks-develop:cliunittest1-prod
-        INSTANCES: 10
-        MY_SECRET: ${tfy:cloud:my-secret-group:my-secret}
