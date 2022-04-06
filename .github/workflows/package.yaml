@@ -31,6 +31,30 @@ jobs:
             echo "Zipping ${dir}"
             tar -zcvf packages/${dir##*/}.tgz -C ${dir} .
           done
+      - name: Create index.yaml
+        run: |
+          parse_yaml() {
+              local prefix=$2
+              local s='[[:space:]]*' w='[a-zA-Z0-9_]*' fs=$(echo @|tr @ '\034')
+              sed -ne "s|^\($s\)\($w\)$s:$s\"\(.*\)\"$s\$|\1$fs\2$fs\3|p" \
+                    -e "s|^\($s\)\($w\)$s:$s\(.*\)$s\$|\1$fs\2$fs\3|p"  $1 |
+              awk -F$fs '{
+                  indent = length($1)/2;
+                  vname[indent] = $2;
+                  for (i in vname) {if (i > indent) {delete vname[i]}}
+                  if (length($3) > 0) {
+                    vn=""; for (i=0; i<indent; i++) {vn=(vn)(vname[i])("_")}
+                    printf("%s%s%s=\"%s\"\n", "'$prefix'",vn, $2, $3);
+                  }
+              }'
+            }
+          rm -f gh-pages/index.yaml
+          cd main
+          for dir in ./services/*
+          do
+            eval $(parse_yaml ${dir}/template.yaml "template_")
+            echo -e "- id: ${dir##*/}\n  description: ${template_description}" >> ../gh-pages/index.yaml
+          done
       - name: Move packaged templates gh-pages branch 
         run: |
           cd gh-pages
@@ -38,6 +62,7 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
           mv ../main/packages/* .
           git add *.tgz
+          git add index.yaml
           git status
           git diff-index --quiet HEAD || 
              ( git commit -a -m '[CI] Publish packages' && 

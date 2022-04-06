@@ -1,5 +1,5 @@
 ---
-description: A basic webapp using FastAPI framework
+description: A basic streamlit service
 params:
   - id: service_name
     type: string
