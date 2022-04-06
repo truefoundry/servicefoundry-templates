@@ -5,7 +5,7 @@ build:
     service_build:
         service_type: fast_api_build
         version: {{python_version}}
-        service: main.py
+        service_file: main.py
         packages: requirements.txt
 
         build_dir: /tmp
