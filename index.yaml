@@ -1,4 +1,4 @@
 - id: fastapi
   description: A basic web service using FastAPI framework
 - id: streamlit
-  description: A basic streamlit service
+  description: A streamlit service
