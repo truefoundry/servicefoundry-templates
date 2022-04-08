@@ -1,6 +1,7 @@
 kind: service
 metadata:
   description: A streamlit service
+spec:
   params:
     - id: service_name
       type: string

@@ -1,6 +1,7 @@
 kind: service
 metadata:
   description: A basic web service using FastAPI framework
+spec:
   params:
     - id: service_name
       type: string
