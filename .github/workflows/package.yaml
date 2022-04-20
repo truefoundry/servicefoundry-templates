@@ -61,7 +61,7 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
           mv ../main/packages/* .
-          mv ../main/base .
+          mv -r ../main/base .
           git add *.tgz
           git add base
           git add index.yaml
