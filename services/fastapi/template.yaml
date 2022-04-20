@@ -33,3 +33,4 @@ spec:
       ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port {{parameters.port}}
     BuildPack.spec.localRunCommand: uvicorn main:app --host 0.0.0.0 --port {{parameters.port}}
     Component.spec.workspace: "{{parameters.workspace}}"
+    Component.spec.name: "{{parameters.service_name}}"
