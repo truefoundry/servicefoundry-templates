@@ -33,4 +33,4 @@ spec:
       WORKDIR app
       ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
     BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
-    Component.spec.workspace: {{parameters.workspace}}
+    Component.spec.workspace: "{{parameters.workspace}}"
