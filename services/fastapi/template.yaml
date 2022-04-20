@@ -21,7 +21,8 @@ spec:
     - id: port
       kind: number
       prompt: Choose a port to run your service
-  baseServiceDef: base_python.yaml
+  baseBuild: base_python.yaml
+  baseService: base_service.yaml
   overwrites:
     BuildPack.spec.docker.dockerFileContent: |
       FROM {{parameters.python_version}}
