@@ -1,9 +1,32 @@
-kind: service
+kind: template
 metadata:
-  description: A streamlit service
+  description: A basic template for using FastAPI framework
 spec:
-  params:
+  parameters:
     - id: service_name
-      type: string
-      prompt: Name your FastAPI service
+      kind: string
+      prompt: Name your Streamlit service
       default: my-fast-api-service
+    - id: python_version
+      kind: options
+      prompt: Choose a Python version for your FastAPI
+      options: [ 'python:3.7', 'python:3.8', 'python:3.9' ]
+      default: python3.7
+    - id: space
+      kind: tfy-workspace
+      prompt: Choose a workspace to deploy your service
+    - id: replics
+      kind: number
+      prompt: Choose a numner to replicas your service
+    - id: port
+      kind: number
+      prompt: Choose a port to run your service
+  baseServiceDef: base_python.yaml
+  overwrites:
+    BuildPack.spec.docker.dockerFileContent: |
+      FROM {{parameters.python_version}}
+      COPY . ./app
+      COPY ./requirement.txt ./requirements.txt
+      RUN pip install -r ./requirements.txt
+      WORKDIR app
+      ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
