@@ -12,7 +12,7 @@ spec:
       prompt: Choose a Python version for your FastAPI
       options: [ 'python:3.7', 'python:3.8', 'python:3.9' ]
       default: python3.7
-    - id: space
+    - id: workspace
       kind: tfy-workspace
       prompt: Choose a workspace to deploy your service
     - id: replics
@@ -31,4 +31,5 @@ spec:
       RUN pip install -r ./requirements.txt
       WORKDIR app
       ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port {{parameters.port}}
-    BuildPack.spec.localRunCommand: uvicorn main:app --host 0.0.0.0 --port {{parameters.port}}'
+    BuildPack.spec.localRunCommand: uvicorn main:app --host 0.0.0.0 --port {{parameters.port}}
+    Component.spec.workspace: {{parameters.workspace}}
