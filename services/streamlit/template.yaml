@@ -32,3 +32,4 @@ spec:
       RUN pip install -r ./requirements.txt
       WORKDIR app
       ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
+    BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}

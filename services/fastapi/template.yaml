@@ -31,3 +31,4 @@ spec:
       RUN pip install -r ./requirements.txt
       WORKDIR app
       ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port {{parameters.port}}
+    BuildPack.spec.localRunCommand: uvicorn main:app --host 0.0.0.0 --port {{parameters.port}}'
