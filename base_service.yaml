@@ -1,0 +1,10 @@
+apiVersion: truefoundry.io/v1
+kind: Component
+spec:
+  type: Server
+  properties:
+    port: 8080
+  traits:
+    - type: scaler
+      properties:
+        replicas: 1

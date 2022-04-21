@@ -1,0 +1,11 @@
+apiVersion: truefoundry.io/v1
+kind: BuildPack
+spec:
+  type: python
+  dependency:
+    autoGenerate: true
+    overwrite: false
+  ignorePatterns: []
+  docker:
+    fileName: DockerFile
+    overwrite: true
