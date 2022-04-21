@@ -14,7 +14,7 @@ spec:
       containerPort: 8080
       protocol: TCP
     env:
-      name: TEST_ENV
+    - name: TEST_ENV
       value: testValue
   traits:
     scale:
