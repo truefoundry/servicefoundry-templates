@@ -1,10 +1,19 @@
 apiVersion: truefoundry.io/v1
 kind: Component
 spec:
-  type: Server
-  properties:
-    port: 8080
+  workloadType: Server
+  osType: linux
+  arch: amd64
+  container:
+    resources:
+      cpu:
+        required: 2
+      memory:
+        required: 512000
+    ports:
+      containerPort: 8080
+      protocol: TCP
+    env:
   traits:
-    - type: scaler
-      properties:
-        replicas: 1
+    scale:
+      replicas: 1
