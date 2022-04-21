@@ -63,7 +63,7 @@ jobs:
           mv ../main/packages/* .
           mv ../main/base/* .
           git add *.tgz
-          git add base
+          git add base/*.yaml
           git add index.yaml
           git status
           git diff-index --quiet HEAD || 
