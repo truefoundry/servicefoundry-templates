@@ -11,7 +11,7 @@ spec:
       memory:
         required: 512000
     ports:
-      containerPort: 8080
+    - containerPort: 8080
       protocol: TCP
     env:
     - name: TEST_ENV
