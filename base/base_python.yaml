@@ -7,5 +7,5 @@ spec:
     overwrite: false
   ignorePatterns: []
   docker:
-    fileName: DockerFile
+    fileName: Dockerfile
     overwrite: true
