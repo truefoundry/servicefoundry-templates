@@ -7,7 +7,7 @@ spec:
   container:
     resources:
       cpu:
-        required: 2
+        required: 0.1
       memory:
         required: 512000
     ports:
