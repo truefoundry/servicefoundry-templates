@@ -8,8 +8,10 @@ spec:
     resources:
       cpu:
         required: 0.1
+        limit: 0.5
       memory:
         required: 512000
+        limit: 512000000
     ports:
     - containerPort: 8080
       protocol: TCP
