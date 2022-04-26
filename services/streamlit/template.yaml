@@ -9,7 +9,7 @@ spec:
       default: my-streamlit-service
     - id: python_version
       kind: options
-      prompt: Choose a Python version for your FastAPI
+      prompt: Choose a Python version for your Streamlit Service
       options: [ 'python:3.7', 'python:3.8', 'python:3.9' ]
       default: python3.7
     - id: workspace

@@ -5,11 +5,11 @@ spec:
   parameters:
     - id: service_name
       kind: string
-      prompt: Name your Streamlit service
+      prompt: Name your FastAPI service
       default: my-fast-api-service
     - id: python_version
       kind: options
-      prompt: Choose a Python version for your FastAPI
+      prompt: Choose a Python version for your FastAPI service
       options: [ 'python:3.7', 'python:3.8', 'python:3.9' ]
       default: python3.7
     - id: workspace
