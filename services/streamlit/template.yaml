@@ -1,12 +1,12 @@
 kind: template
 metadata:
-  description: A basic template for using FastAPI framework
+  description: A basic template for using Streamlit framework
 spec:
   parameters:
     - id: service_name
       kind: string
       prompt: Name your Streamlit service
-      default: my-fast-api-service
+      default: my-streamlit-service
     - id: python_version
       kind: options
       prompt: Choose a Python version for your FastAPI
@@ -15,7 +15,7 @@ spec:
     - id: workspace
       kind: tfy-workspace
       prompt: Choose a workspace to deploy your service
-    - id: replics
+    - id: replica
       kind: number
       prompt: Choose a numner to replicas your service
       default: 1
@@ -24,7 +24,7 @@ spec:
       prompt: Choose a port to run your service
       default: 8080
   baseBuild: base_python.yaml
-  baseService: base_service.yaml
+  baseComponent: base_service.yaml
   overwrites:
     BuildPack.spec.docker.dockerFileContent: |
       FROM {{parameters.python_version}}
@@ -35,4 +35,40 @@ spec:
       ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
     BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
     Component.spec.workspace: "{{parameters.workspace}}"
-    Component.spec.name: "{{parameters.service_name}}"      
+    Component.spec.name: "{{parameters.service_name}}"
+    Component.spec.traits.scale.replica: {{parameters.replica}}
+    Component.spec.container.ports:
+      - containerPort: {{parameters.port}}
+        protocol: TCP
+  comments: |
+#  To customize the docker file:
+#  BuildPack.spec.docker.dockerFileContent: |
+#    FROM {{parameters.python_version}}
+#    COPY . ./app
+#    COPY ./requirement.txt ./requirements.txt
+#    RUN pip install -r ./requirements.txt
+#    WORKDIR app
+#    ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
+
+#  To change the run command when you run the service locally
+#  BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
+
+#  To change the required cpu
+#  Component.spec.container.resources.cpu.required: 0.5
+
+#  To change the maximum cpu
+#  Component.spec.container.resources.cpu.limit: 0.5
+
+#  To change the required memory
+#  Component.spec.container.resources.memory.required: 512000
+
+#  To change the maximum memory
+#  Component.spec.container.resources.memory.limit: 512000000
+
+#  To change the number of replica
+#  Component.spec.traits.scale.replica: "{{parameters.replica}}"
+
+#  To change the port which are open from container
+#  Component.spec.container.ports:
+#    - containerPort: {{parameters.port}}
+#      protocol: TCP
