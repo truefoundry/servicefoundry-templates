@@ -42,4 +42,4 @@ spec:
     BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
     Component.spec.workspace: "{{parameters.workspace}}"
     Component.spec.name: "{{parameters.service_name}}"
-    Component.spec.container.env: "{{parameters.env}}"
+    Component.spec.container.env: {{parameters.env}}
