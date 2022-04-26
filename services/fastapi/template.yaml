@@ -27,13 +27,13 @@ spec:
   baseComponent: base_service.yaml
   overwrites:
     BuildPack.spec.docker.dockerFileContent: |
-      FROM {{parameters.python_version}}
+      FROM ${parameters.python_version}
       COPY . ./app
       COPY ./requirement.txt ./requirements.txt
       RUN pip install -r ./requirements.txt
       WORKDIR app
-      ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port {{parameters.port}}
-    BuildPack.spec.localRunCommand: uvicorn main:app --host 0.0.0.0 --port {{parameters.port}}
+      ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port ${parameters.port}
+    BuildPack.spec.localRunCommand: uvicorn main:app --host 0.0.0.0 --port ${parameters.port}
     Component.spec.workspace: ${parameters.workspace}
     Component.spec.name: ${parameters.service_name}
     Component.spec.traits.scale.replicas: ${parameters.replicas}
@@ -43,15 +43,15 @@ spec:
     comments: |
 #  To customize the docker file:
 #  BuildPack.spec.docker.dockerFileContent: |
-#    FROM {{parameters.python_version}}
+#    FROM ${parameters.python_version}
 #    COPY . ./app
 #    COPY ./requirement.txt ./requirements.txt
 #    RUN pip install -r ./requirements.txt
-#    WORKDIR app
-#    ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
+#    WORKDIR ap
+#    ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port ${parameters.port}
 
 #  To change the run command when you run the service locally
-#  BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
+#  BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 0.0.0.0 --server.port ${parameters.port}
 
 #  To change the required cpu
 #  Component.spec.container.resources.cpu.required: 0.5
@@ -66,9 +66,9 @@ spec:
 #  Component.spec.container.resources.memory.limit: 512000000
 
 #  To change the number of replica
-#  Component.spec.traits.scale.replica: "{{parameters.replica}}"
+#  Component.spec.traits.scale.replica: "${parameters.replica}"
 
 #  To change the port which are open from container
 #  Component.spec.container.ports:
-#    - containerPort: {{parameters.port}}
+#    - containerPort: ${parameters.port}
 #      protocol: TCP
