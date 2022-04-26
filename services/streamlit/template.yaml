@@ -9,13 +9,13 @@ spec:
       default: my-streamlit-service
     - id: python_version
       kind: options
-      prompt: Choose a Python version for your Streamlit Service
+      prompt: Choose a Python version for your FastAPI
       options: [ 'python:3.7', 'python:3.8', 'python:3.9' ]
       default: python3.7
     - id: workspace
       kind: tfy-workspace
       prompt: Choose a workspace to deploy your service
-    - id: replica
+    - id: replicas
       kind: number
       prompt: Choose a numner to replicas your service
       default: 1
@@ -27,18 +27,18 @@ spec:
   baseComponent: base_service.yaml
   overwrites:
     BuildPack.spec.docker.dockerFileContent: |
-      FROM {{parameters.python_version}}
+      FROM ${parameters.python_version}
       COPY . ./app
       COPY ./requirement.txt ./requirements.txt
       RUN pip install -r ./requirements.txt
       WORKDIR app
-      ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
-    BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
-    Component.spec.workspace: "{{parameters.workspace}}"
-    Component.spec.name: "{{parameters.service_name}}"
-    Component.spec.traits.scale.replica: 1
+      ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port ${parameters.port}
+    BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 0.0.0.0 --server.port ${parameters.port}
+    Component.spec.workspace: ${parameters.workspace}
+    Component.spec.name: ${parameters.service_name}
+    Component.spec.traits.scale.replicas: ${parameters.replicas}
     Component.spec.container.ports:
-      - containerPort: 8080
+      - containerPort: ${parameters.port}
         protocol: TCP
   comments: |
 #  To customize the docker file:
