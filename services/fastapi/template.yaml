@@ -29,7 +29,7 @@ spec:
     BuildPack.spec.docker.dockerFileContent: |
       FROM ${parameters.python_version}
       COPY . ./app
-      COPY ./requirement.txt ./requirements.txt
+      COPY ./requirements.txt ./requirements.txt
       RUN pip install -r ./requirements.txt
       WORKDIR app
       ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port ${parameters.port}
@@ -45,7 +45,7 @@ spec:
 #  BuildPack.spec.docker.dockerFileContent: |
 #    FROM ${parameters.python_version}
 #    COPY . ./app
-#    COPY ./requirement.txt ./requirements.txt
+#    COPY ./requirements.txt ./requirements.txt
 #    RUN pip install -r ./requirements.txt
 #    WORKDIR ap
 #    ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port ${parameters.port}
