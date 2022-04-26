@@ -36,9 +36,9 @@ spec:
     BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
     Component.spec.workspace: "{{parameters.workspace}}"
     Component.spec.name: "{{parameters.service_name}}"
-    Component.spec.traits.scale.replica: {{parameters.replica}}
+    Component.spec.traits.scale.replica: "{{parameters.replica}}"
     Component.spec.container.ports:
-      - containerPort: {{parameters.port}}
+      - containerPort: "{{parameters.port}}"
         protocol: TCP
   comments: |
 #  To customize the docker file:
