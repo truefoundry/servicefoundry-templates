@@ -1,4 +1,4 @@
 - id: fastapi
   description: A basic template for using FastAPI framework
 - id: streamlit
-  description: A basic template for using FastAPI framework
+  description: A basic template for using Streamlit framework
