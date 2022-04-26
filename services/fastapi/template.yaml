@@ -15,7 +15,7 @@ spec:
     - id: workspace
       kind: tfy-workspace
       prompt: Choose a workspace to deploy your service
-    - id: replics
+    - id: replicas
       kind: number
       prompt: Choose a numner to replicas your service
       default: 1
