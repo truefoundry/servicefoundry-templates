@@ -23,12 +23,6 @@ spec:
       kind: number
       prompt: Choose a port to run your service
       default: 8080
-    - id: env
-      kind: array
-      prompt: Provide env
-      default:
-        - name: TEST_ENV
-          value: testValue
   baseBuild: base_python.yaml
   baseService: base_service.yaml
   overwrites:
@@ -41,6 +35,4 @@ spec:
       ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
     BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 0.0.0.0 --server.port {{parameters.port}}
     Component.spec.workspace: "{{parameters.workspace}}"
-    Component.spec.name: "{{parameters.service_name}}"
-    Component.spec.container.env: |
-      {{parameters.env}}
+    Component.spec.name: "{{parameters.service_name}}"      
