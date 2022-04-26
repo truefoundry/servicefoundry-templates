@@ -33,7 +33,7 @@ spec:
       RUN pip install -r ./requirements.txt
       WORKDIR app
       ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port ${parameters.port}
-    BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 0.0.0.0 --server.port ${parameters.port}
+    BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 127.0.0.1 --server.port ${parameters.port}
     Component.spec.workspace: ${parameters.workspace}
     Component.spec.name: ${parameters.service_name}
     Component.spec.traits.scale.replicas: ${parameters.replicas}
@@ -51,7 +51,7 @@ spec:
 #    ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port ${parameters.port}
 
 #  To change the run command when you run the service locally
-#  BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 0.0.0.0 --server.port ${parameters.port}
+#  BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 127.0.0.1 --server.port ${parameters.port}
 
 #  To change the required cpu
 #  Component.spec.container.resources.cpu.required: 0.5
