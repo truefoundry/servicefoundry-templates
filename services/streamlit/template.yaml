@@ -18,6 +18,7 @@ spec:
     - id: replics
       kind: number
       prompt: Choose a numner to replicas your service
+      default: 1
     - id: port
       kind: number
       prompt: Choose a port to run your service
