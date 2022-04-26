@@ -24,7 +24,7 @@ spec:
       prompt: Choose a port to run your service
       default: 8080
   baseBuild: base_python.yaml
-  baseService: base_service.yaml
+  baseComponent: base_service.yaml
   overwrites:
     BuildPack.spec.docker.dockerFileContent: |
       FROM {{parameters.python_version}}
