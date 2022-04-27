@@ -27,7 +27,7 @@ spec:
   baseComponent: base_service.yaml
   overwrites:
     BuildPack.spec.docker.dockerFileContent: |
-      # This file is ganerated from service foundry. Don't make changes directly.
+      # This file is generated from service foundry. Don't make changes directly.
       FROM ${parameters.python_version}
       COPY . ./app
       COPY ./requirements.txt ./requirements.txt
@@ -44,7 +44,7 @@ spec:
     comments: |
 #  To customize the docker file:
 #  BuildPack.spec.docker.dockerFileContent: |
-#    # This file is ganerated from service foundry. Don't make changes directly.
+#    # This file is generated from service foundry. Don't make changes directly.
 #    FROM ${parameters.python_version}
 #    COPY . ./app
 #    COPY ./requirements.txt ./requirements.txt
