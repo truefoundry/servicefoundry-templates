@@ -68,7 +68,7 @@ spec:
 #  Component.spec.container.resources.memory.limit: 512000000
 
 #  To change the number of replica
-#  Component.spec.traits.scale.replica: "${parameters.replica}"
+#  Component.spec.traits.scale.replicas: "${parameters.replicas}"
 
 #  To change the port which are open from container
 #  Component.spec.container.ports:
