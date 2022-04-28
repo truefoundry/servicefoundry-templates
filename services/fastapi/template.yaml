@@ -24,10 +24,10 @@ spec:
       prompt: Choose a port to run your service
       default: 8080
   postInitInstruction: |
-    FastAPI service `{service_name}` is initialized.
-    The service will be deployed in `{workspace}` workspace.
+    FastAPI service `{parameters.service_name}` is initialized.
+    The service will be deployed in `{parameters.workspace}` workspace.
 
-    Project folder `{service_name}` is created under current directory.
+    Project folder `{parameters.service_name}` is created under current directory.
     Under project folder,
     1. You can find the project entrypoint `main.py`.
     2. Requirments should be defined in `requirements.txt`.
