@@ -18,3 +18,7 @@ def add(a: int, b: int):
 def subtract(a: int, b: int):
     return a - b
 
+
+@app.get("/")
+def root():
+    return {"message": "Hello World"}
