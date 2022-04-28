@@ -3,7 +3,7 @@ kind: BuildPack
 spec:
   type: python
   dependency:
-    autoUpdate: true
+    autoUpdate: false
   ignorePatterns: []
   docker:
     fileName: Dockerfile
