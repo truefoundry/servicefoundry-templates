@@ -17,7 +17,7 @@ spec:
       prompt: Choose a workspace to deploy your service
     - id: replicas
       kind: number
-      prompt: Choose a numner to replicas your service
+      prompt: Choose a number of replicas for your service
       default: 1
     - id: port
       kind: number
