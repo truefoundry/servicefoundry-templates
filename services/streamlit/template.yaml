@@ -23,6 +23,17 @@ spec:
       kind: number
       prompt: Choose a port to run your service
       default: 8080
+  postInitInstruction: |
+    Streamlit service `{parameters.service_name}` is initialized.
+    The service will be deployed in `{parameters.workspace}` workspace.
+
+    Project folder `{parameters.service_name}` is created under current directory.
+    Under project folder,
+    1. You can find the project entrypoint `main.py`.
+    2. Requirments should be defined in `requirements.txt`.
+
+    Getting started with Streamlit? Visit the link below for first steps.
+    https://docs.streamlit.io/library/get-started
   baseBuild: base_python.yaml
   baseComponent: base_service.yaml
   overwrites:
