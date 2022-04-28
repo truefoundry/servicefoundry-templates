@@ -23,6 +23,17 @@ spec:
       kind: number
       prompt: Choose a port to run your service
       default: 8080
+  postInitInstruction: |
+    FastAPI service `{service_name}` is initialized.
+    The service will be deployed in `{workspace}` workspace.
+
+    Project folder `{service_name}` is created under current directory.
+    Under project folder,
+    1. You can find the project entrypoint `main.py`.
+    2. Requirments should be defined in `requirements.txt`.
+
+    Getting started with FastAPI? Visit the link below for first steps.
+    https://fastapi.tiangolo.com/tutorial/first-steps/
   baseBuild: base_python.yaml
   baseComponent: base_service.yaml
   overwrites:
