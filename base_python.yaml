@@ -8,3 +8,5 @@ spec:
   docker:
     fileName: Dockerfile
     overwrite: true
+  local:
+    requirementFiles: ["requirements.txt"]
