@@ -12,9 +12,10 @@ app = servicefoundry.fast_api()
 model = mlflow.sklearn.load_model("model/")
 
 
-@app.get(path="/predict")
+@app.post(path="/predict")
 def predict(a: List):
-    return model.predict(np.array(a))
+    ret = model.predict(np.array(a))
+    return ret.tolist()
 
 
 @app.get("/")
