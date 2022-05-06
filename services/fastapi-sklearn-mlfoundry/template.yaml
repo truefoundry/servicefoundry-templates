@@ -74,7 +74,7 @@ spec:
     Component.spec.container.ports:
       - containerPort: ${parameters.port}
         protocol: TCP
-    comments: |
+  comments: |
 #  To customize the docker file:
 #  BuildPack.spec.docker.dockerFileContent: |
 #    # This file is generated from service foundry. Don't make changes directly.
