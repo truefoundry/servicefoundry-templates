@@ -6,7 +6,7 @@ spec:
     - id: service_name
       kind: string
       prompt: Name your FastAPI service
-      default: my-fastapi-sklearn-mlfoundry-service
+      default: my-fastapi-skt-mlf-service
     - id: run_fqn
       kind: string
       prompt: FQN of you mlfoundry run
