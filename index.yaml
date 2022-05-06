@@ -1,3 +1,5 @@
+- id: docker
+  description: A basic template for using FastAPI framework
 - id: fastapi
   description: A basic template for using FastAPI framework
 - id: fastapi-sklearn-mlfoundry

@@ -1,0 +1,8 @@
+apiVersion: truefoundry.io/v1
+kind: BuildPack
+spec:
+  type: docker
+  ignorePatterns: []
+  docker:
+    fileName: Dockerfile
+    overwrite: false
