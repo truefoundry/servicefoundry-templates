@@ -42,17 +42,32 @@ spec:
   overwrites:
     BuildPack.spec.preBuildScript: |
       #!/bin/sh
-      pip install mlfoundry
-      mlfoundry download model --run_id ${parameters.run_fqn} --path model
+      set -x
+      mlfoundry --version
+      status=$?
+      [ $status -eq 0 ] && echo "mlfoundry cli is already installed" || pip install mlfoundry
+      set -e
+      export MLF_API_KEY=MTBlYTI5MTctZDZmMC00NmNjLWI0ZmItY2NiNTk1ZDExNzlmOmQ5NDE2MA==
+      if [[ -d "model" && $(< model/.run.txt) == "${parameters.run_fqn}" ]]
+      then
+        echo "Model of mlfoundry run fqn ${parameters.run_fqn} is already downloaded"
+      else
+        rm -rf model
+        echo "Going to download model of mlfoundry run fqn ${parameters.run_fqn}"
+        mlfoundry download model --run_fqn ${parameters.run_fqn} --path model
+        echo "${parameters.run_fqn}" > model/.run.txt
+      fi
     BuildPack.spec.docker.dockerFileContent: |
       # This file is generated from service foundry. Don't make changes directly.
       FROM ${parameters.python_version}
       COPY . ./app
       COPY ./requirements.txt ./requirements.txt
-      RUN pip install -r ./requirements.txt
+      COPY ./model/requirements.txt ./model_requirements.txt
+      RUN pip install -r ./requirements.txt -r ./model_requirements.txt
       WORKDIR app
       ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port ${parameters.port}
-    BuildPack.spec.localRunCommand: uvicorn main:app --host 127.0.0.1 --port ${parameters.port}
+    BuildPack.spec.local.requirementFiles: ["requirements.txt", "model/requirements.txt"]
+    BuildPack.spec.local.runCommand: uvicorn main:app --host 127.0.0.1 --port ${parameters.port}
     Component.spec.workspace: ${parameters.workspace}
     Component.spec.name: ${parameters.service_name}
     Component.spec.traits.scale.replicas: ${parameters.replicas}
