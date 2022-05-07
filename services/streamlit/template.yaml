@@ -45,7 +45,7 @@ spec:
       RUN pip install -r ./requirements.txt
       WORKDIR app
       ENTRYPOINT streamlit run main.py --server.address 0.0.0.0 --server.port ${parameters.port} --server.headless true
-    BuildPack.spec.localRunCommand: streamlit run main.py --server.address 127.0.0.1 --server.port ${parameters.port} --server.headless true
+    BuildPack.spec.local.runCommand: streamlit run main.py --server.address 127.0.0.1 --server.port ${parameters.port} --server.headless true
     Component.spec.workspace: ${parameters.workspace}
     Component.spec.name: ${parameters.service_name}
     Component.spec.traits.scale.replicas: ${parameters.replicas}
