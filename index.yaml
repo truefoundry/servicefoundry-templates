@@ -2,6 +2,8 @@
   description: A basic template for using FastAPI framework
 - id: fastapi
   description: A basic template for using FastAPI framework
+- id: fastapi-inference
+  description: A basic template for using FastAPI framework
 - id: fastapi-sklearn-mlfoundry
   description: A basic template for using FastAPI framework
 - id: streamlit
