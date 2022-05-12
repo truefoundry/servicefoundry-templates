@@ -13,7 +13,7 @@ def root():
 
 try:
     from predict import predict
-    app.add_route("/predict", predict)
+    app.add_api_route("/predict", predict)
 except ImportError as error:
     print("Failed to import predict: " + error.message)
     raise error
