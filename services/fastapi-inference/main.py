@@ -1,5 +1,6 @@
 import logging
 import servicefoundry
+import uvicorn
 
 logger = logging.getLogger(__name__)
 
@@ -17,6 +18,4 @@ try:
 except ImportError as error:
     print(error.__class__.__name__ + ": " + error.message)
     raise error
-
-
 
