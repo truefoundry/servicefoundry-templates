@@ -1,9 +1,9 @@
 import logging
-import servicefoundry
+import servicefoundry.service.fastapi as fastapi
 
 logger = logging.getLogger(__name__)
 
-app = servicefoundry.fast_api()
+app = fastapi.app()
 
 
 @app.get("/")
@@ -12,11 +12,8 @@ def root():
 
 
 try:
-    from inference import inference
-    inference(app)
+    from predict import predict
+    app.add_route("/predict", predict)
 except ImportError as error:
-    print(error.__class__.__name__ + ": " + error.message)
+    print("Failed to import predict: " + error.message)
     raise error
-
-
-
