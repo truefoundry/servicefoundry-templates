@@ -1,7 +1,7 @@
 import logging
 import os
 
-import servicefoundry
+import servicefoundry.service.fastapi as fastapi
 
 logger = logging.getLogger(__name__)
 
