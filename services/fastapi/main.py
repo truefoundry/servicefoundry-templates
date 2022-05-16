@@ -1,11 +1,11 @@
 import logging
 import os
 
-import servicefoundry.service.fastapi as fastapi
+from servicefoundry.service import fastapi
 
 logger = logging.getLogger(__name__)
 
-app = servicefoundry.fast_api()
+app = servicefoundry.app()
 print(os.environ)
 
 
