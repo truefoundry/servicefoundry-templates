@@ -1,5 +1,5 @@
 import logging
-import servicefoundry.service.fastapi as fastapi
+from servicefoundry.service import fastapi
 import mlflow
 import numpy as np
 
@@ -8,7 +8,7 @@ from typing import List
 
 logger = logging.getLogger(__name__)
 
-app = servicefoundry.fast_api()
+app = servicefoundry.app()
 model = mlflow.sklearn.load_model("model/")
 
 
