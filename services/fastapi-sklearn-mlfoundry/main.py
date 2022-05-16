@@ -1,5 +1,5 @@
 import logging
-import servicefoundry
+import servicefoundry.service.fastapi as fastapi
 import mlflow
 import numpy as np
 
