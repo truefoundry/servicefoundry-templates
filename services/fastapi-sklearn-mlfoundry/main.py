@@ -8,7 +8,7 @@ from typing import List
 
 logger = logging.getLogger(__name__)
 
-app = servicefoundry.app()
+app = fastapi.app()
 model = mlflow.sklearn.load_model("model/")
 
 
