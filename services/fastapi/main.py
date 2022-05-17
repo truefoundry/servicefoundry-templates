@@ -5,7 +5,7 @@ from servicefoundry.service import fastapi
 
 logger = logging.getLogger(__name__)
 
-app = servicefoundry.app()
+app = fastapi.app()
 print(os.environ)
 
 
