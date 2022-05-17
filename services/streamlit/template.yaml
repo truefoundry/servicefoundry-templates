@@ -53,6 +53,9 @@ spec:
       - containerPort: ${parameters.port}
         protocol: TCP
   comments: |
+    To use your own docker file:
+    BuildPack.spec.docker.overwrite: false
+    
     To customize the docker file:
     BuildPack.spec.docker.dockerFileContent: |
       # This file is generated from service foundry. Don't make changes directly.
