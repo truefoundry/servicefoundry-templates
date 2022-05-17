@@ -75,35 +75,38 @@ spec:
       - containerPort: ${parameters.port}
         protocol: TCP
   comments: |
-#  To customize the docker file:
-#  BuildPack.spec.docker.dockerFileContent: |
-#    # This file is generated from service foundry. Don't make changes directly.
-#    FROM ${parameters.python_version}
-#    COPY . ./app
-#    COPY ./requirements.txt ./requirements.txt
-#    RUN pip install -r ./requirements.txt
-#    WORKDIR ap
-#    ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port ${parameters.port}
+    To use your own docker file:
+    BuildPack.spec.docker.overwrite: false
+    
+    To customize the docker file:
+    BuildPack.spec.docker.dockerFileContent: |
+      # This file is generated from service foundry. Don't make changes directly.
+      FROM ${parameters.python_version}
+      COPY . ./app
+      COPY ./requirements.txt ./requirements.txt
+      RUN pip install -r ./requirements.txt
+      WORKDIR ap
+      ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port ${parameters.port}
 
-#  To change the run command when you run the service locally
-#  BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 127.0.0.1 --server.port ${parameters.port}
+    To change the run command when you run the service locally
+    BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 127.0.0.1 --server.port ${parameters.port}
 
-#  To change the required cpu
-#  Component.spec.container.resources.cpu.required: 0.5
+    To change the required cpu
+    Component.spec.container.resources.cpu.required: 0.5
 
-#  To change the maximum cpu
-#  Component.spec.container.resources.cpu.limit: 0.5
+    To change the maximum cpu
+    Component.spec.container.resources.cpu.limit: 0.5
 
-#  To change the required memory
-#  Component.spec.container.resources.memory.required: 512000
+    To change the required memory
+    Component.spec.container.resources.memory.required: 512000
 
-#  To change the maximum memory
-#  Component.spec.container.resources.memory.limit: 512000000
+    To change the maximum memory
+    Component.spec.container.resources.memory.limit: 512000000
 
-#  To change the number of replica
-#  Component.spec.traits.scale.replicas: "${parameters.replicas}"
+    To change the number of replica
+    Component.spec.traits.scale.replicas: "${parameters.replicas}"
 
-#  To change the port which are open from container
-#  Component.spec.container.ports:
-#    - containerPort: ${parameters.port}
-#      protocol: TCP
+    To change the port which are open from container
+    Component.spec.container.ports:
+     - containerPort: ${parameters.port}
+       protocol: TCP
