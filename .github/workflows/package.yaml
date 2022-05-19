@@ -53,7 +53,7 @@ jobs:
           for dir in ./services/*
           do
             eval $(parse_yaml ${dir}/template.yaml "template_")
-            echo -e "- id: ${dir##*/}\n  description: ${template_metadata_description}\n tags: ${template_metadata_tags}" >> ../gh-pages/index.yaml
+            echo -e "- id: ${dir##*/}\n  description: ${template_metadata_description}\n  tags: ${template_metadata_tags}" >> ../gh-pages/index.yaml
           done
       - name: Move packaged templates gh-pages branch 
         run: |
