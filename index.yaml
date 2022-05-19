@@ -6,7 +6,7 @@
   tags: [active]
 - id: fastapi-inference
   description: A basic template for using FastAPI framework
-  tags: [active]
+  tags: [inactive]
 - id: fastapi-sklearn-mlfoundry
   description: A basic template for using FastAPI framework
   tags: [active]
