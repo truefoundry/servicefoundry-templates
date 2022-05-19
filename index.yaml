@@ -1,15 +1,15 @@
 - id: docker
   description: A basic template for using FastAPI framework
-. tags: 
+ tags: 
 - id: fastapi
   description: A basic template for using FastAPI framework
-. tags: 
+ tags: 
 - id: fastapi-inference
   description: A basic template for using FastAPI framework
-. tags: [active]
+ tags: [active]
 - id: fastapi-sklearn-mlfoundry
   description: A basic template for using FastAPI framework
-. tags: [active]
+ tags: [active]
 - id: streamlit
   description: A basic template for using Streamlit framework
-. tags: [active]
+ tags: [active]
