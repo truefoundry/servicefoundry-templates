@@ -64,11 +64,11 @@ spec:
       COPY . ./app
       COPY ./requirements.txt ./requirements.txt
       RUN pip install -r ./requirements.txt
-      WORKDIR ap
-      ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port ${parameters.port}
-    
+      WORKDIR app
+      ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port ${parameters.port}
+
     To change the run command when you run the service locally
-    BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 127.0.0.1 --server.port ${parameters.port}
+    BuildPack.spec.localRunCommand: uvicorn main:app --host 127.0.0.1 --port ${parameters.port}
     
     To change the required cpu
     Component.spec.container.resources.cpu.required: 0.5
