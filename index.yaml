@@ -9,7 +9,7 @@
   tags: [inactive]
 - id: fastapi-sklearn-mlfoundry
   description: A basic template for using FastAPI framework
-  tags: [active]
+  tags: [inactive]
 - id: streamlit
   description: A basic template for using Streamlit framework
   tags: [active]
