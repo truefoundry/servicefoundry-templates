@@ -3,7 +3,7 @@
   tags: 
 - id: fastapi
   description: A basic template for using FastAPI framework
-  tags: 
+  tags: [active]
 - id: fastapi-inference
   description: A basic template for using FastAPI framework
   tags: [active]
