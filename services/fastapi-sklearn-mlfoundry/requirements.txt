@@ -1,4 +1,6 @@
 servicefoundry
+fastapi
+prometheus_client
 uvicorn
 mlfoundry
 sklearn
