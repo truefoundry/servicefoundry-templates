@@ -5,6 +5,13 @@ spec:
   osType: linux
   arch: amd64
   container:
+    resources:
+    cpu:
+      required: 0.01
+      limit: 4.0
+    memory:
+      required: 128000000
+      limit: 4096000000
     ports:
     - containerPort: 8080
       protocol: TCP
