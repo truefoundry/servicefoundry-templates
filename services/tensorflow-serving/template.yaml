@@ -12,15 +12,15 @@ spec:
       prompt: Choose a workspace to deploy your service
     - id: model_path
       kind: string
-      prompt: Relative path to model folder
+      prompt: Enter the relative path to the TensorFlow SavedModel folder
       default: model/
     - id: model_name
       kind: string
-      prompt: Name of the model
+      prompt: Provide a name for the model
       default: model
     - id: model_version
       kind: number
-      prompt: Provide version for the model
+      prompt: Provide the version of the model
       default: 1
     - id: replicas
       kind: number
