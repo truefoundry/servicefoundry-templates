@@ -17,11 +17,11 @@ spec:
     - id: model_name
       kind: string
       prompt: Name of the model
-      default: 1
+      default: model
     - id: model_version
       kind: number
       prompt: Provide version for the model
-      default: 1
+      default: model
     - id: replicas
       kind: number
       prompt: Choose a number of replicas for your service
