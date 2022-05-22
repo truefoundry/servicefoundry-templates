@@ -13,3 +13,6 @@
 - id: streamlit
   description: A basic template for using Streamlit framework
   tags: [active]
+- id: tensorflow-serving
+  description: Easily deploy TensorFlow saved models using this template
+  tags: [active]
