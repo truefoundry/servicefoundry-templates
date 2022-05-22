@@ -26,10 +26,6 @@ spec:
       kind: number
       prompt: Choose a number of replicas for your service
       default: 1
-    - id: port
-      kind: number
-      prompt: Choose a port to run your service
-      default: 8080
   postInitInstruction: |
 
   baseBuild: base_docker.yaml
@@ -44,7 +40,7 @@ spec:
     Component.spec.name: ${parameters.service_name}
     Component.spec.traits.scale.replicas: ${parameters.replicas}
     Component.spec.container.ports:
-      - containerPort: ${parameters.port}
+      - containerPort: 8501
         protocol: TCP
   comments: |
     To change the required cpu
