@@ -21,7 +21,7 @@ spec:
     - id: model_version
       kind: number
       prompt: Provide version for the model
-      default: model
+      default: 1
     - id: replicas
       kind: number
       prompt: Choose a number of replicas for your service
