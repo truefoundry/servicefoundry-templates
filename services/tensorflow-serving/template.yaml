@@ -1,0 +1,68 @@
+kind: template
+metadata:
+  description: Easily deploy TensorFlow saved models using this template
+spec:
+  parameters:
+    - id: service_name
+      kind: string
+      prompt: Name your FastAPI service
+      default: my-docker-service
+    - id: workspace
+      kind: tfy-workspace
+      prompt: Choose a workspace to deploy your service
+    - id: model_path
+      kind: string
+      prompt: Relative path to model folder
+      default: model/
+    - id: model_name
+      kind: string
+      prompt: Name of the model
+      default: 1
+    - id: model_version
+      kind: number
+      prompt: Provide version for the model
+      default: 1
+    - id: replicas
+      kind: number
+      prompt: Choose a number of replicas for your service
+      default: 1
+    - id: port
+      kind: number
+      prompt: Choose a port to run your service
+      default: 8080
+  postInitInstruction: |
+
+  baseBuild: base_docker.yaml
+  baseComponent: base_service.yaml
+  overwrites:
+    BuildPack.spec.docker.dockerFileContent: |
+      # This file is generated from service foundry. Don't make changes directly.
+      FROM tensorflow/serving
+      ENV MODEL_NAME=${parameters.model_name}
+      COPY ${parameters.model_path} /models/${parameters.model_name}/${parameters.model_version}
+    Component.spec.workspace: ${parameters.workspace}
+    Component.spec.name: ${parameters.service_name}
+    Component.spec.traits.scale.replicas: ${parameters.replicas}
+    Component.spec.container.ports:
+      - containerPort: ${parameters.port}
+        protocol: TCP
+  comments: |
+    To change the required cpu
+    Component.spec.container.resources.cpu.required: 0.5
+
+    To change the maximum cpu
+    Component.spec.container.resources.cpu.limit: 0.5
+
+    To change the required memory
+    Component.spec.container.resources.memory.required: 512000
+
+    To change the maximum memory
+    Component.spec.container.resources.memory.limit: 512000000
+
+    To change the number of replica
+    Component.spec.traits.scale.replicas: "${parameters.replicas}"
+
+    To change the port which are open from container
+    Component.spec.container.ports:
+      - containerPort: ${parameters.port}
+        protocol: TCP
