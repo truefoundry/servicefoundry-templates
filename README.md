@@ -10,3 +10,4 @@ This repository contains the templates that servicefoundry server supports.
 - `boolean`
 - `path`
 - `tfy-workspace`
+- `tfy-python-file`
