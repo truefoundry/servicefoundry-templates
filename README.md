@@ -8,5 +8,5 @@ This repository contains the templates that servicefoundry server supports.
 - `number`
 - `options`
 - `boolean`
-- `file-path`
+- `path`
 - `tfy-workspace`
