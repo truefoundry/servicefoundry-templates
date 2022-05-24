@@ -4,6 +4,9 @@ metadata:
   tags: ["inactive"]
 spec:
   parameters:
+    - id: python_service_file
+      kind: tfy-python-service-file
+      prompt: Choose a python file containing your functions.
     - id: service_name
       kind: string
       prompt: Name your FastAPI service
@@ -12,17 +15,19 @@ spec:
       kind: options
       prompt: Choose a Python version for your FastAPI service
       options: [ 'python:3.7', 'python:3.8', 'python:3.9' ]
-      default: python3.7
+      default: python3.9
     - id: workspace
       kind: tfy-workspace
       prompt: Choose a workspace to deploy your service
     - id: replicas
       kind: number
       prompt: Choose a number of replicas for your service
+      extra: true
       default: 1
     - id: port
       kind: number
       prompt: Choose a port to run your service
+      extra: true
       default: 8080
   postInitInstruction: |
     FastAPI service `{parameters.service_name}` is initialized.
