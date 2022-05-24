@@ -5,17 +5,17 @@ metadata:
 spec:
   parameters:
     - id: python_service_file
-      kind: tfy-python-service-file
+      kind: tfy-python-file
       prompt: Choose a python file containing your functions.
     - id: service_name
       kind: string
       prompt: Name your FastAPI service
-      default: my-fast-api-service
+      suggest: my-fast-api-service
     - id: python_version
       kind: options
       prompt: Choose a Python version for your FastAPI service
-      options: [ 'python:3.7', 'python:3.8', 'python:3.9' ]
-      default: python3.9
+      options: [ 'python:3.7', 'python:3.8', 'python:3.9', 'python:3.10' ]
+      suggest: python3.10
     - id: workspace
       kind: tfy-workspace
       prompt: Choose a workspace to deploy your service
