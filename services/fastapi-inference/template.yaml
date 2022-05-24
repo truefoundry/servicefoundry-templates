@@ -5,7 +5,7 @@ metadata:
 spec:
   parameters:
     - id: python_service_file
-      kind: tfy-python-service-file
+      kind: tfy-python-file
       prompt: Choose a python file containing your functions.
     - id: service_name
       kind: string
