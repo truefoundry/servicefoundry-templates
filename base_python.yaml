@@ -7,6 +7,6 @@ spec:
   ignorePatterns: []
   docker:
     fileName: Dockerfile
-    overwrite: true
+    overwrite: false
   local:
     requirementFiles: ["requirements.txt"]
