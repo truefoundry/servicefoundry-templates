@@ -1,7 +1,7 @@
 kind: template
 metadata:
   description: A basic template for using FastAPI framework
-  tags: ["active"]
+  tags: ["init_template"]
 spec:
   parameters:
     - id: service_name
