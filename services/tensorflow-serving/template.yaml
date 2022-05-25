@@ -1,6 +1,7 @@
 kind: template
 metadata:
   description: Easily deploy TensorFlow saved models using this template
+  tags: ["init_template"]
 spec:
   parameters:
     - id: service_name
