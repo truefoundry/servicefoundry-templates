@@ -11,7 +11,7 @@ spec:
       kind: tfy-workspace
       prompt: Choose a workspace to deploy your service
     - id: model_path
-      kind: path
+      kind: file-path
       prompt: Enter the relative path to the TensorFlow SavedModel folder
       default: model/
     - id: model_name
