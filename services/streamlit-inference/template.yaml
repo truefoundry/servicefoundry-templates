@@ -42,7 +42,7 @@ spec:
     Component.spec.name: ${parameters.service_name}
     Component.spec.traits.scale.replicas: ${parameters.replicas}
     Component.spec.container.ports:
-      - containerPort: 7680
+      - containerPort: 7860
         protocol: TCP
   comments: |
     To use your own docker file:
