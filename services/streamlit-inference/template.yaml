@@ -24,11 +24,6 @@ spec:
       prompt: Choose a number of replicas for your service
       extra: true
       default: 1
-    - id: port
-      kind: number
-      prompt: Choose a port to run your service
-      extra: true
-      default: 8080
   postInitInstruction: |
     TBD
   baseBuild: base_python.yaml
@@ -41,13 +36,13 @@ spec:
       COPY ./requirements.txt ./requirements.txt
       RUN pip install -r ./requirements.txt
       WORKDIR app
-      ENTRYPOINT streamlit run main.py --server.address 0.0.0.0 --server.port ${parameters.port} --server.headless true
-    BuildPack.spec.local.runCommand: streamlit run main.py --server.address 127.0.0.1 --server.port ${parameters.port} --server.headless true
+      ENTRYPOINT streamlit run main.py
+    BuildPack.spec.local.runCommand: streamlit run main.py
     Component.spec.workspace: ${parameters.workspace}
     Component.spec.name: ${parameters.service_name}
     Component.spec.traits.scale.replicas: ${parameters.replicas}
     Component.spec.container.ports:
-      - containerPort: ${parameters.port}
+      - containerPort: 7680
         protocol: TCP
   comments: |
     To use your own docker file:
@@ -61,10 +56,10 @@ spec:
       COPY ./requirements.txt ./requirements.txt
       RUN pip install -r ./requirements.txt
       WORKDIR app
-      ENTRYPOINT streamlit run main.py --server.address 0.0.0.0 --server.port ${parameters.port} --server.headless true
+      ENTRYPOINT python main.py
 
     To change the run command when you run the service locally
-    BuildPack.spec.localRunCommand: streamlit run main.py --server.address 127.0.0.1 --server.port ${parameters.port} --server.headless true
+    BuildPack.spec.localRunCommand: python main.py
     
     To change the required cpu
     Component.spec.container.resources.cpu.required: 0.5
@@ -80,8 +75,3 @@ spec:
     
     To change the number of replica
     Component.spec.traits.scale.replicas: "${parameters.replicas}"
-    
-    To change the port which are open from container
-    Component.spec.container.ports:
-      - containerPort: ${parameters.port}
-        protocol: TCP
