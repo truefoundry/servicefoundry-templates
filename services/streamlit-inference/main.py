@@ -31,3 +31,5 @@ with gr.Blocks() as demo:
                 button = gr.Button("Submit")
                 output = gr.Textbox(label="Output", interactive=False)
                 button.click(func, inputs=inputs, outputs=[output])
+                
+demo.launch()
