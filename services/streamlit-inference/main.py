@@ -26,7 +26,6 @@ with gr.Blocks() as demo:
                 inputs = []
                 for param_name, value in sig.parameters.items():
                     text_input = get_input(param_name, value.annotation)
-                    print(text_input)
                     inputs.append(text_input)
                 button = gr.Button("Submit")
                 output = gr.Textbox(label="Output", interactive=False)
