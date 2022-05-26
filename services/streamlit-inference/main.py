@@ -31,4 +31,4 @@ with gr.Blocks() as demo:
                 output = gr.Textbox(label="Output", interactive=False)
                 button.click(func, inputs=inputs, outputs=[output])
                 
-demo.launch(server_port=7860)
+demo.launch(server_name="0.0.0.0", server_port=7860)
