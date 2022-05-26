@@ -41,6 +41,7 @@ spec:
     Component.spec.workspace: ${parameters.workspace}
     Component.spec.name: ${parameters.service_name}
     Component.spec.traits.scale.replicas: ${parameters.replicas}
+    Component.spec.container.resources.memory.limit: 856000000
     Component.spec.container.ports:
       - containerPort: 7860
         protocol: TCP
@@ -68,10 +69,10 @@ spec:
     Component.spec.container.resources.cpu.limit: 0.5
     
     To change the required memory
-    Component.spec.container.resources.memory.required: 512000
+    Component.spec.container.resources.memory.required: 128000000
     
     To change the maximum memory
-    Component.spec.container.resources.memory.limit: 512000000
+    Component.spec.container.resources.memory.limit: 1024000000
     
     To change the number of replica
     Component.spec.traits.scale.replicas: "${parameters.replicas}"
