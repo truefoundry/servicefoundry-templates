@@ -36,8 +36,8 @@ spec:
       COPY ./requirements.txt ./requirements.txt
       RUN pip install -r ./requirements.txt
       WORKDIR app
-      ENTRYPOINT streamlit run main.py
-    BuildPack.spec.local.runCommand: streamlit run main.py
+      ENTRYPOINT python main.py
+    BuildPack.spec.local.runCommand: python main.py
     Component.spec.workspace: ${parameters.workspace}
     Component.spec.name: ${parameters.service_name}
     Component.spec.traits.scale.replicas: ${parameters.replicas}
