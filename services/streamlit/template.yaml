@@ -41,9 +41,9 @@ spec:
     BuildPack.spec.docker.dockerFileContent: |
       # This file is generated from service foundry. Don't make changes directly.
       FROM ${parameters.python_version}
+      COPY ./requirements.txt /tmp/
+      RUN pip install -r /tmp/requirements.txt
       COPY . ./app
-      COPY ./requirements.txt ./requirements.txt
-      RUN pip install -r ./requirements.txt
       WORKDIR app
       ENTRYPOINT streamlit run main.py --server.address 0.0.0.0 --server.port ${parameters.port} --server.headless true
     BuildPack.spec.local.runCommand: streamlit run main.py --server.address 127.0.0.1 --server.port ${parameters.port} --server.headless true
@@ -61,9 +61,9 @@ spec:
     BuildPack.spec.docker.dockerFileContent: |
       # This file is generated from service foundry. Don't make changes directly.
       FROM ${parameters.python_version}
+      COPY ./requirements.txt /tmp/
+      RUN pip install -r /tmp/requirements.txt
       COPY . ./app
-      COPY ./requirements.txt ./requirements.txt
-      RUN pip install -r ./requirements.txt
       WORKDIR app
       ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port ${parameters.port}
 

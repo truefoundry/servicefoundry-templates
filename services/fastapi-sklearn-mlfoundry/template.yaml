@@ -61,10 +61,9 @@ spec:
     BuildPack.spec.docker.dockerFileContent: |
       # This file is generated from service foundry. Don't make changes directly.
       FROM ${parameters.python_version}
+      COPY ./requirements.txt ./model/requirements.txt /tmp/
+      RUN pip install -r /tmp/requirements.txt -r /tmp/model_requirements.txt
       COPY . ./app
-      COPY ./requirements.txt ./requirements.txt
-      COPY ./model/requirements.txt ./model_requirements.txt
-      RUN pip install -r ./requirements.txt -r ./model_requirements.txt
       WORKDIR app
       ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port ${parameters.port}
     BuildPack.spec.local.requirementFiles: ["requirements.txt", "model/requirements.txt"]
@@ -83,11 +82,11 @@ spec:
     BuildPack.spec.docker.dockerFileContent: |
       # This file is generated from service foundry. Don't make changes directly.
       FROM ${parameters.python_version}
+      COPY ./requirements.txt ./model/requirements.txt /tmp/
+      RUN pip install -r /tmp/requirements.txt -r /tmp/model_requirements.txt
       COPY . ./app
-      COPY ./requirements.txt ./requirements.txt
-      RUN pip install -r ./requirements.txt
-      WORKDIR ap
-      ENTRYPOINT streamlit run streamlit.py --server.address 0.0.0.0 --server.port ${parameters.port}
+      WORKDIR app
+      ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port ${parameters.port}
 
     To change the run command when you run the service locally
     BuildPack.spec.localRunCommand: streamlit run streamlit.py --server.address 127.0.0.1 --server.port ${parameters.port}

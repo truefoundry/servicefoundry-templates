@@ -46,9 +46,9 @@ spec:
     BuildPack.spec.docker.dockerFileContent: |
       # This file is generated from service foundry. Don't make changes directly.
       FROM ${parameters.python_version}
+      COPY ./requirements.txt /tmp/
+      RUN pip install -r /tmp/requirements.txt
       COPY . ./app
-      COPY ./requirements.txt ./requirements.txt
-      RUN pip install -r ./requirements.txt
       WORKDIR app
       ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port ${parameters.port}
     BuildPack.spec.local.runCommand: uvicorn main:app --host 127.0.0.1 --port ${parameters.port}
@@ -66,9 +66,9 @@ spec:
     BuildPack.spec.docker.dockerFileContent: |
       # This file is generated from service foundry. Don't make changes directly.
       FROM ${parameters.python_version}
+      COPY ./requirements.txt /tmp/
+      RUN pip install -r /tmp/requirements.txt
       COPY . ./app
-      COPY ./requirements.txt ./requirements.txt
-      RUN pip install -r ./requirements.txt
       WORKDIR app
       ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port ${parameters.port}
 
