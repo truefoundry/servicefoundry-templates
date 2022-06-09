@@ -10,6 +10,9 @@
 - id: fastapi-sklearn-mlfoundry
   description: A basic template for using FastAPI framework
   tags: [inactive]
+- id: gradio
+  description: A basic template for using Gradio framework
+  tags: [init_template]
 - id: streamlit
   description: A basic template for using Streamlit framework
   tags: [init_template]
