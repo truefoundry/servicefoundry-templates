@@ -1,0 +1,85 @@
+kind: template
+metadata:
+  description: A basic template for using Gradio framework
+  tags: ["init_template"]
+spec:
+  parameters:
+    - id: service_name
+      kind: string
+      prompt: Name your Gradio service
+      suggest: my-gradio-service
+    - id: python_version
+      kind: options
+      prompt: Choose a Python version for your FastAPI
+      options: [ 'python:3.7', 'python:3.8', 'python:3.9', 'python:3.10' ]
+      suggest: python:3.10
+    - id: workspace
+      kind: tfy-workspace
+      prompt: Choose a workspace to deploy your service
+    - id: replicas
+      kind: number
+      prompt: Choose a number of replicas for your service
+      default: 1
+  postInitInstruction: |
+    Gradio service `{parameters.service_name}` is initialized.
+    The service will be deployed in `{parameters.workspace}` workspace.
+
+    Project folder `{parameters.service_name}` is created under current directory.
+    Under project folder,
+    1. You can find the project entrypoint `main.py`.
+    2. Requirments should be defined in `requirements.txt`.
+
+  baseBuild: base_python.yaml
+  baseComponent: base_service.yaml
+  overwrites:
+    BuildPack.spec.docker.dockerFileContent: |
+      # This file is generated from service foundry. Don't make changes directly.
+      FROM ${parameters.python_version}
+      COPY . ./app
+      COPY ./requirements.txt ./requirements.txt
+      RUN pip install -r ./requirements.txt
+      WORKDIR app
+      ENTRYPOINT python main.py
+    BuildPack.spec.local.runCommand: python main.py
+    Component.spec.workspace: ${parameters.workspace}
+    Component.spec.name: ${parameters.service_name}
+    Component.spec.traits.scale.replicas: ${parameters.replicas}
+    Component.spec.container.ports:
+      - containerPort: 7860
+        protocol: TCP
+  comments: |
+    To use your own docker file:
+    BuildPack.spec.docker.overwrite: false
+    
+    To customize the docker file:
+    BuildPack.spec.docker.dockerFileContent: |
+      # This file is generated from service foundry. Don't make changes directly.
+      FROM ${parameters.python_version}
+      COPY . ./app
+      COPY ./requirements.txt ./requirements.txt
+      RUN pip install -r ./requirements.txt
+      WORKDIR app
+      ENTRYPOINT python main.py
+
+    To change the run command when you run the service locally
+    BuildPack.spec.localRunCommand: python main.py
+
+    To change the required cpu
+    Component.spec.container.resources.cpu.required: 0.5
+
+    To change the maximum cpu
+    Component.spec.container.resources.cpu.limit: 0.5
+
+    To change the required memory
+    Component.spec.container.resources.memory.required: 512000
+
+    To change the maximum memory
+    Component.spec.container.resources.memory.limit: 512000000
+
+    To change the number of replica
+    Component.spec.traits.scale.replicas: "${parameters.replicas}"
+
+    To change the port which are open from container
+    Component.spec.container.ports:
+      - containerPort: ${parameters.port}
+        protocol: TCP
