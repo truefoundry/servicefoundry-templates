@@ -26,7 +26,7 @@ spec:
 
     Project folder `{parameters.service_name}` is created under current directory.
     Under project folder,
-    1. You can find the project entrypoint `main.py`.
+    1. You can find the project entrypoint `webapp.py`.
     2. Requirments should be defined in `requirements.txt`.
 
   baseBuild: base_python.yaml
@@ -39,8 +39,8 @@ spec:
       COPY ./requirements.txt ./requirements.txt
       RUN pip install -r ./requirements.txt
       WORKDIR app
-      ENTRYPOINT python main.py
-    BuildPack.spec.local.runCommand: python main.py
+      ENTRYPOINT python webapp.py
+    BuildPack.spec.local.runCommand: python webapp.py
     Component.spec.workspace: ${parameters.workspace}
     Component.spec.name: ${parameters.service_name}
     Component.spec.traits.scale.replicas: ${parameters.replicas}
@@ -59,10 +59,10 @@ spec:
       COPY ./requirements.txt ./requirements.txt
       RUN pip install -r ./requirements.txt
       WORKDIR app
-      ENTRYPOINT python main.py
+      ENTRYPOINT python webapp.py
 
     To change the run command when you run the service locally
-    BuildPack.spec.localRunCommand: python main.py
+    BuildPack.spec.localRunCommand: python webapp.py
 
     To change the required cpu
     Component.spec.container.resources.cpu.required: 0.5
