@@ -1,0 +1,78 @@
+kind: template
+metadata:
+  description: Template to deploy Gradio inteface as webapp
+  tags: ["inactive"]
+spec:
+  parameters:
+    - id: python_service_file
+      kind: tfy-python-file
+      prompt: Choose a python file containing your functions.
+    - id: service_name
+      kind: string
+      prompt: Name your FastAPI service
+      suggest: my-fast-api-service
+    - id: python_version
+      kind: options
+      prompt: Choose a Python version for your FastAPI service
+      options: [ 'python:3.7', 'python:3.8', 'python:3.9', 'python:3.10' ]
+      suggest: python:3.10
+    - id: workspace
+      kind: tfy-workspace
+      prompt: Choose a workspace to deploy your service
+    - id: replicas
+      kind: number
+      prompt: Choose a number of replicas for your service
+      extra: true
+      default: 1
+  postInitInstruction: |
+    TBD
+  baseBuild: base_python.yaml
+  baseComponent: base_service.yaml
+  overwrites:
+    BuildPack.spec.docker.dockerFileContent: |
+      # This file is generated from service foundry.
+      FROM ${parameters.python_version}
+      COPY . ./app
+      COPY ./requirements.txt ./requirements.txt
+      RUN pip install -r ./requirements.txt
+      WORKDIR app
+      ENTRYPOINT python main.py
+    BuildPack.spec.local.runCommand: python main.py
+    Component.spec.workspace: ${parameters.workspace}
+    Component.spec.name: ${parameters.service_name}
+    Component.spec.traits.scale.replicas: ${parameters.replicas}
+    Component.spec.container.resources.memory.limit: 512000000
+    Component.spec.container.ports:
+      - containerPort: 7860
+        protocol: TCP
+  comments: |
+    To use your own docker file:
+    BuildPack.spec.docker.overwrite: false
+    
+    To customize the docker file:
+    BuildPack.spec.docker.dockerFileContent: |
+      # This file is generated from service foundry.
+      FROM ${parameters.python_version}
+      COPY . ./app
+      COPY ./requirements.txt ./requirements.txt
+      RUN pip install -r ./requirements.txt
+      WORKDIR app
+      ENTRYPOINT python main.py
+
+    To change the run command when you run the service locally
+    BuildPack.spec.localRunCommand: python main.py
+    
+    To change the required cpu
+    Component.spec.container.resources.cpu.required: 0.5
+    
+    To change the maximum cpu
+    Component.spec.container.resources.cpu.limit: 0.5
+    
+    To change the required memory
+    Component.spec.container.resources.memory.required: 128000000
+    
+    To change the maximum memory
+    Component.spec.container.resources.memory.limit: 1024000000
+    
+    To change the number of replica
+    Component.spec.traits.scale.replicas: "${parameters.replicas}"
