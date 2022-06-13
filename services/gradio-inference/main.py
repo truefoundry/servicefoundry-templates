@@ -1,3 +1,3 @@
-from ${module_name} import gradio_webapp
+from ${module_name} import gr
 
-gradio_webapp.launch()
+gr.launch()
