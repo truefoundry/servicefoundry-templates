@@ -13,6 +13,9 @@
 - id: gradio
   description: A basic template for using Gradio framework
   tags: [init_template]
+- id: gradio-webapp
+  description: Template to deploy Gradio inteface as webapp
+  tags: [inactive]
 - id: streamlit
   description: A basic template for using Streamlit framework
   tags: [init_template]
