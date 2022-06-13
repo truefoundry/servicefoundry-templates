@@ -1,3 +1,3 @@
 from ${module_name} import app
 
-app.launch()
+app.launch(server_port=7860)
