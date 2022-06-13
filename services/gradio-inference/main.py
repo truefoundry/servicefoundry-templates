@@ -1,3 +1,3 @@
-from ${module_name} import gr
+from ${module_name} import app
 
-gr.launch()
+app.launch()
