@@ -1,1 +1,3 @@
-${module_file_content}
+from ${module_name} import x
+
+x.launch()
