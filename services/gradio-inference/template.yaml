@@ -41,7 +41,8 @@ spec:
     Component.spec.workspace: ${parameters.workspace}
     Component.spec.name: ${parameters.service_name}
     Component.spec.traits.scale.replicas: ${parameters.replicas}
-    Component.spec.container.resources.memory.limit: 512000000
+    Component.spec.container.resources.memory.required: 512000000
+    Component.spec.container.resources.memory.limit: 1024000000
     Component.spec.container.ports:
       - containerPort: 7860
         protocol: TCP
