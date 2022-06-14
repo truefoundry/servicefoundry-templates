@@ -44,7 +44,7 @@ spec:
     Component.spec.container.resources.memory.required: 1024000000
     Component.spec.container.resources.memory.limit: 1300000000
     Component.spec.container.ports:
-      - containerPort: 7860
+      - containerPort: 8080
         protocol: TCP
   comments: |
     To use your own docker file:
