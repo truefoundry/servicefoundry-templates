@@ -1,6 +1,6 @@
 kind: template
 metadata:
-  description: A basic template for using FastAPI framework
+  description: Template to deploy Gradio inteface as webapp
   tags: ["inactive"]
 spec:
   parameters:
@@ -24,41 +24,27 @@ spec:
       prompt: Choose a number of replicas for your service
       extra: true
       default: 1
-    - id: port
-      kind: number
-      prompt: Choose a port to run your service
-      extra: true
-      default: 8080
   postInitInstruction: |
-    FastAPI service `{parameters.service_name}` is initialized.
-    The service will be deployed in `{parameters.workspace}` workspace.
-
-    Project folder `{parameters.service_name}` is created under current directory.
-    Under project folder,
-    1. You can find the project entrypoint `main.py`.
-    2. Requirments should be defined in `requirements.txt`.
-
-    Getting started with FastAPI? Visit the link below for first steps.
-    https://fastapi.tiangolo.com/tutorial/first-steps/
+    TBD
   baseBuild: base_python.yaml
   baseComponent: base_service.yaml
   overwrites:
     BuildPack.spec.docker.dockerFileContent: |
-      # This file is generated from service foundry. Don't make changes directly.
+      # This file is generated from service foundry.
       FROM ${parameters.python_version}
-      COPY ./requirements.txt /tmp/
-      RUN pip install -r /tmp/requirements.txt
+      COPY ./requirements.txt ./requirements.txt
+      RUN pip install -r ./requirements.txt
       COPY . ./app
       WORKDIR app
-      ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port ${parameters.port}
-    BuildPack.spec.local.runCommand: uvicorn main:app --host 127.0.0.1 --port ${parameters.port}
+      ENTRYPOINT python main.py
+    BuildPack.spec.local.runCommand: python main.py
     Component.spec.workspace: ${parameters.workspace}
     Component.spec.name: ${parameters.service_name}
     Component.spec.traits.scale.replicas: ${parameters.replicas}
     Component.spec.container.resources.memory.required: 1024000000
     Component.spec.container.resources.memory.limit: 1300000000
     Component.spec.container.ports:
-      - containerPort: ${parameters.port}
+      - containerPort: 8080
         protocol: TCP
   comments: |
     To use your own docker file:
@@ -66,16 +52,16 @@ spec:
     
     To customize the docker file:
     BuildPack.spec.docker.dockerFileContent: |
-      # This file is generated from service foundry. Don't make changes directly.
+      # This file is generated from service foundry.
       FROM ${parameters.python_version}
-      COPY ./requirements.txt /tmp/
-      RUN pip install -r /tmp/requirements.txt
+      COPY ./requirements.txt ./requirements.txt
+      RUN pip install -r ./requirements.txt
       COPY . ./app
       WORKDIR app
-      ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port ${parameters.port}
+      ENTRYPOINT python main.py
 
     To change the run command when you run the service locally
-    BuildPack.spec.localRunCommand: uvicorn main:app --host 127.0.0.1 --port ${parameters.port}
+    BuildPack.spec.localRunCommand: python main.py
     
     To change the required cpu
     Component.spec.container.resources.cpu.required: 0.5
@@ -84,15 +70,10 @@ spec:
     Component.spec.container.resources.cpu.limit: 0.5
     
     To change the required memory
-    Component.spec.container.resources.memory.required: 512000
+    Component.spec.container.resources.memory.required: 128000000
     
     To change the maximum memory
-    Component.spec.container.resources.memory.limit: 512000000
+    Component.spec.container.resources.memory.limit: 1024000000
     
     To change the number of replica
     Component.spec.traits.scale.replicas: "${parameters.replicas}"
-    
-    To change the port which are open from container
-    Component.spec.container.ports:
-      - containerPort: ${parameters.port}
-        protocol: TCP

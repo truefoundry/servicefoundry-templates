@@ -1,19 +1,16 @@
 kind: template
 metadata:
-  description: A basic template for using FastAPI framework
-  tags: ["inactive"]
+  description: A basic template for using Gradio framework
+  tags: ["init_template"]
 spec:
   parameters:
-    - id: python_service_file
-      kind: tfy-python-file
-      prompt: Choose a python file containing your functions.
     - id: service_name
       kind: string
-      prompt: Name your FastAPI service
-      suggest: my-fast-api-service
+      prompt: Name your Gradio service
+      suggest: my-gradio-service
     - id: python_version
       kind: options
-      prompt: Choose a Python version for your FastAPI service
+      prompt: Choose a Python version for your FastAPI
       options: [ 'python:3.7', 'python:3.8', 'python:3.9', 'python:3.10' ]
       suggest: python:3.10
     - id: workspace
@@ -22,43 +19,33 @@ spec:
     - id: replicas
       kind: number
       prompt: Choose a number of replicas for your service
-      extra: true
       default: 1
-    - id: port
-      kind: number
-      prompt: Choose a port to run your service
-      extra: true
-      default: 8080
   postInitInstruction: |
-    FastAPI service `{parameters.service_name}` is initialized.
+    Gradio service `{parameters.service_name}` is initialized.
     The service will be deployed in `{parameters.workspace}` workspace.
 
     Project folder `{parameters.service_name}` is created under current directory.
     Under project folder,
-    1. You can find the project entrypoint `main.py`.
+    1. You can find the project entrypoint `webapp.py`.
     2. Requirments should be defined in `requirements.txt`.
 
-    Getting started with FastAPI? Visit the link below for first steps.
-    https://fastapi.tiangolo.com/tutorial/first-steps/
   baseBuild: base_python.yaml
   baseComponent: base_service.yaml
   overwrites:
     BuildPack.spec.docker.dockerFileContent: |
       # This file is generated from service foundry. Don't make changes directly.
       FROM ${parameters.python_version}
-      COPY ./requirements.txt /tmp/
-      RUN pip install -r /tmp/requirements.txt
       COPY . ./app
+      COPY ./requirements.txt ./requirements.txt
+      RUN pip install -r ./requirements.txt
       WORKDIR app
-      ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port ${parameters.port}
-    BuildPack.spec.local.runCommand: uvicorn main:app --host 127.0.0.1 --port ${parameters.port}
+      ENTRYPOINT python webapp.py
+    BuildPack.spec.local.runCommand: python webapp.py
     Component.spec.workspace: ${parameters.workspace}
     Component.spec.name: ${parameters.service_name}
     Component.spec.traits.scale.replicas: ${parameters.replicas}
-    Component.spec.container.resources.memory.required: 1024000000
-    Component.spec.container.resources.memory.limit: 1300000000
     Component.spec.container.ports:
-      - containerPort: ${parameters.port}
+      - containerPort: 7860
         protocol: TCP
   comments: |
     To use your own docker file:
@@ -68,30 +55,30 @@ spec:
     BuildPack.spec.docker.dockerFileContent: |
       # This file is generated from service foundry. Don't make changes directly.
       FROM ${parameters.python_version}
-      COPY ./requirements.txt /tmp/
-      RUN pip install -r /tmp/requirements.txt
       COPY . ./app
+      COPY ./requirements.txt ./requirements.txt
+      RUN pip install -r ./requirements.txt
       WORKDIR app
-      ENTRYPOINT uvicorn main:app --host 0.0.0.0 --port ${parameters.port}
+      ENTRYPOINT python webapp.py
 
     To change the run command when you run the service locally
-    BuildPack.spec.localRunCommand: uvicorn main:app --host 127.0.0.1 --port ${parameters.port}
-    
+    BuildPack.spec.localRunCommand: python webapp.py
+
     To change the required cpu
     Component.spec.container.resources.cpu.required: 0.5
-    
+
     To change the maximum cpu
     Component.spec.container.resources.cpu.limit: 0.5
-    
+
     To change the required memory
     Component.spec.container.resources.memory.required: 512000
-    
+
     To change the maximum memory
     Component.spec.container.resources.memory.limit: 512000000
-    
+
     To change the number of replica
     Component.spec.traits.scale.replicas: "${parameters.replicas}"
-    
+
     To change the port which are open from container
     Component.spec.container.ports:
       - containerPort: ${parameters.port}
