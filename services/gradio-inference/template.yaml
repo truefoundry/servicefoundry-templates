@@ -32,8 +32,8 @@ spec:
     BuildPack.spec.docker.dockerFileContent: |
       # This file is generated from service foundry.
       FROM ${parameters.python_version}
-      COPY ./requirements.txt ./requirements.txt
-      RUN pip install -r ./requirements.txt
+      COPY ./requirements.txt /tmp/
+      RUN pip install -r /tmp/requirements.txt
       COPY . ./app
       WORKDIR app
       ENTRYPOINT python main.py
@@ -54,8 +54,8 @@ spec:
     BuildPack.spec.docker.dockerFileContent: |
       # This file is generated from service foundry.
       FROM ${parameters.python_version}
-      COPY ./requirements.txt ./requirements.txt
-      RUN pip install -r ./requirements.txt
+      COPY ./requirements.txt /tmp/
+      RUN pip install -r /tmp/requirements.txt
       COPY . ./app
       WORKDIR app
       ENTRYPOINT python main.py
