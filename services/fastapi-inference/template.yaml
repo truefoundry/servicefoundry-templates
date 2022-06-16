@@ -43,6 +43,7 @@ spec:
   baseBuild: base_python.yaml
   baseComponent: base_service.yaml
   overwrites:
+    Component.spec.container.injectApiKeyInEnv: true
     BuildPack.spec.docker.dockerFileContent: |
       # This file is generated from service foundry. Don't make changes directly.
       FROM ${parameters.python_version}
